@@ -21,3 +21,8 @@ export const reverse3 = (array: number[]): number[] => {
   array[array.length - 1] = firstNum;
   return array;
 };
+export const improvedReverse3 = (array: number[]): number[] => {
+  let n: number = array.length
+  for(i = 0; i < n; i++)
+     
+ }
