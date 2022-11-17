@@ -21,8 +21,65 @@ export const reverse3 = (array: number[]): number[] => {
   array[array.length - 1] = firstNum;
   return array;
 };
-export const improvedReverse3 = (array: number[]): number[] => {
-  let n: number = array.length
-  for(i = 0; i < n; i++)
-     
- }
+
+//
+// [5, 2, 3, 4, 1], [2, 4, 6, 8, 10, 12, 14, 16]
+//    i^     ^j
+// 1 array.len / 2 (middle)
+// 2 something that captures just one index in the array
+// 3 replace the original 1 with the 5, array[i] = array[j], create a varaible to capture the end of the array
+// 4 array[j] = temp;
+class Stack<T> {
+  private stack: T[] = [];
+  private size: number = 0;
+
+  constructor() {}
+
+  // [10] size = 1
+  push(item: T): void {
+    this.stack[this.size++] = item;
+  }
+
+  pop(): T | null {
+    if (this.size === 0) {
+      return null;
+    }
+
+    this.size--; // 0
+    return this.stack[this.size];
+  }
+}
+
+export const reverse = (str: string): string => {
+  if (str === '') return '';
+
+  let end: number = str.length - 1;
+  let char: string = str.charAt(end);
+  return char + reverse(str.substring(0, end));
+};
+
+export const improvedReverse = (array: number[]): number[] => {
+  // [1, 2, 3, 4, 5]
+  const stack: Stack<number> = new Stack();
+
+  // array.reverse();
+
+  array.forEach((element) => {
+    stack.push(element);
+  });
+
+  for (let index = 0; index < array.length; index++) {
+    array[index] = stack.pop() as number;
+  }
+
+  // let n: number = array.length / 2;
+  // let j: number = array.length - 1;
+
+  // for (let i: number = 0; i < n; i++, j--) {
+  //   let temp: number = array[i];
+  //   array[i] = array[j];
+  //   array[j] = temp;
+  // }
+
+  return array;
+};
